@@ -1,41 +1,216 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>youni calculator</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, p { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #eee;
+      }
+      body {
+      background: url("/uploads/media/default/0001/01/b5edc1bad4dc8c20291c8394527cb2c5b43ee13c.jpeg") no-repeat center;
+      background-size: cover;
+      }
+      h1, h2 {
+      text-transform: uppercase;
+      font-weight: 400;
+      }
+      h2 {
+      margin: 0 0 0 8px;
+      }
+      .main-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 25px;
+      background: rgba(102, 0, 102,0.9); 
+      }
+      .top-part {
+      padding: 10px;
+      }
+      .top-part {
+      text-align: center;
+      }
+      .fa-graduation-cap {
+      font-size: 32px;
+      }
+      form {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px 70px; 
+      }
+      .title {
+      display: flex;
+      align-items: center;
+      }
+      .info-holder{
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      }
+      .info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      padding: 10px 40px 10px 10px;
+      }
+      input, select {
+      padding: 5px;
+      margin-bottom: 30px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #eee;
+      }
+      input::placeholder {
+      color: #a6a6a6;
+      }
+      option:focus {
+      border: none;
+      }
+      option {
+      background: black; 
+      border: none;
+      }
+      input {
+      margin: 0 10px 0 0;
+      vertical-align: middle;
+      }
+      button {
+      padding: 10px 5px;
+      border-radius: 5px; 
+      border: none;
+      background: #ffffff; 
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      color: #660066;
+      display: inline-block;
+      width: 100%;
+      }
+      button:hover {
+      background: #999900;
+      color: #ffffff;
+      }
+      @media (min-width: 568px) {
+      html, body {
+      height: 100%;
+      }
+      .main-block {
+      flex-direction: column;
+      height: calc(100% - 50px);
+      }
+      .top-part {
+      padding: 20px;
+      margin-top: -30px;
+      }
+      .form{
+      display: table;
+      height: 100%;
+      table-layout: fixed;
+      }
+      .result{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-block">
+      <div class="top-part">
+        <!--i class="fas fa-graduation-cap"></i-->
+        <h1>由你计算</h1>
+        <p>榜单得分计算，由“播放指数”“传播指数”“喜好度”“畅销指数”“推荐指数”五项汇总得到</p>
+        <!--div class="btn-group">
+          <a class="btn-item" href="https://www.w3docs.com/learn-html.html">Learn HTML</a>
+          <a class="btn-item" href="https://www.w3docs.com/quiz/#">Select Quiz</a>
+        </div-->
+      </div>
+      <form action="/">
+        <div class="title">
+          <i class="fas fa-pencil-alt"></i> 
+          <h4>指数值</h4>
+        </div>
+        <div class="info-holder">
+          <div class="info">
+            <p>播放</p>
+            <input type="text" name="bofang" placeholder="例:99.01">
+          </div>
+          <div class="info">
+            <p>传播</p>
+            <input type="text" name="chuanbo" placeholder="例:99.01">
+          </div>
+          <div class="info">
+            <p>喜好</p>
+            <input type="text" name="xihao" placeholder="例:99.01">
+          </div>
+          <div class="info">
+            <p>畅销</p>
+            <input type="text" name="changxiao" placeholder="例:99.01">
+          </div>
+          <div class="info">
+            <p>推荐</p>
+            <input type="text" name="tuijian" placeholder="例:99.01">
+          </div>
+        </div>
+        <button type="button" onclick="calculateScore()">计算结果</button>
+        <div class="result">
+          <h3>分数</h3>
+          <h1 id="score">0</h1>
+        </div>
+        <script>
+          function calculateScore() {
+            var bofang = parseFloat(document.getElementsByName('bofang')[0].value)
+            if (!validateInput(bofang)) {
+              alert("请输入正确的播放值")
+              return
+            }
+            var chuanbo = parseFloat(document.getElementsByName('chuanbo')[0].value)
+            if (!validateInput(chuanbo)) {
+              alert("请输入正确的传播值")
+              return
+            }
+            var xihao = parseFloat(document.getElementsByName('xihao')[0].value)
+            if (!validateInput(xihao)) {
+              alert("请输入正确的喜好值")
+              return
+            }
+            var changxiao = parseFloat(document.getElementsByName('changxiao')[0].value)
+            if (!validateInput(changxiao)) {
+              alert("请输入正确的畅销值")
+              return
+            }
+            var tuijian = parseFloat(document.getElementsByName('tuijian')[0].value)
+            if (!validateInput(tuijian)) {
+              alert("请输入正确的推荐值")
+              return 
+            }
+            var temp = Math.pow((0.40 * bofang) + (0.15 * chuanbo) + (0.1 * xihao) + (0.15 * changxiao) + (0.2 * tuijian),2)/10000
+	          var expo = Math.exp(temp * -6)
+            var result = (1-expo)/(1+expo) * 100
+            document.getElementById("score").innerText = result.toFixed(4)
+          }
 
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
-
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
-
-  <meta name="theme-color" content="#fafafa">
-</head>
-
-<body>
-
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
-  </script>
-  <script src="https://www.google-analytics.com/analytics.js" async></script>
-</body>
-
+          function validateInput(num) {
+            if (isNaN(num) || num < 0|| num > 100) {
+              return false
+            }
+            return true
+          }
+        </script>
+      </form>
+    </div>
+  </body>
 </html>
